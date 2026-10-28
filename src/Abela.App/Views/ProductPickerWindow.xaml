@@ -1,0 +1,20 @@
+<Window x:Class="Abela.App.Views.ProductPickerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="اختيار منتج" Height="500" Width="650" FlowDirection="RightToLeft" WindowStartupLocation="CenterOwner">
+    <DockPanel Margin="16">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBox x:Name="SearchBox" Width="300" Margin="0,0,8,0" KeyDown="SearchBox_KeyDown"/>
+            <Button Content="بحث" Style="{StaticResource PrimaryButton}" Click="Search_Click"/>
+        </StackPanel>
+        <Button DockPanel.Dock="Bottom" Content="اختيار" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Margin="0,10,0,0" Click="Select_Click"/>
+        <DataGrid x:Name="ResultsGrid" MouseDoubleClick="ResultsGrid_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="الكود" Binding="{Binding Code}" Width="90"/>
+                <DataGridTextColumn Header="الاسم" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="السعر" Binding="{Binding SalePrice, StringFormat={}{0:N2}}" Width="80"/>
+                <DataGridTextColumn Header="الكمية المتوفرة" Binding="{Binding CurrentQuantity}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Window>

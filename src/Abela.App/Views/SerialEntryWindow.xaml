@@ -1,0 +1,13 @@
+<Window x:Class="Abela.App.Views.SerialEntryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="الأرقام التسلسلية" Height="450" Width="420" FlowDirection="RightToLeft" WindowStartupLocation="CenterOwner">
+    <DockPanel Margin="16">
+        <TextBlock x:Name="InfoText" DockPanel.Dock="Top" TextWrapping="Wrap" Margin="0,0,0,10" FontWeight="Bold"/>
+        <Button DockPanel.Dock="Bottom" Content="تأكيد" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Margin="0,10,0,0" Click="Confirm_Click"/>
+        <TextBlock x:Name="ErrorText" DockPanel.Dock="Bottom" Foreground="#DC2626" TextWrapping="Wrap" Visibility="Collapsed"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ContentControl x:Name="SerialsPanel"/>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

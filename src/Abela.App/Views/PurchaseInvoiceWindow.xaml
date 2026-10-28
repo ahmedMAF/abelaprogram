@@ -1,0 +1,88 @@
+<Window x:Class="Abela.App.Views.PurchaseInvoiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="فاتورة شراء جديدة" Height="740" Width="960" FlowDirection="RightToLeft" WindowStartupLocation="CenterOwner">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="فاتورة شراء جديدة" Style="{StaticResource PageTitle}"/>
+
+        <WrapPanel Grid.Row="1" Margin="0,0,0,10">
+            <StackPanel Margin="0,0,16,0">
+                <TextBlock Text="المورد"/>
+                <ComboBox x:Name="SupplierCombo" Width="220" DisplayMemberPath="Name" Margin="0,4,0,0" IsEditable="True" IsTextSearchEnabled="True"/>
+            </StackPanel>
+            <StackPanel Margin="0,0,16,0">
+                <TextBlock Text="رقم فاتورة المورد (اختياري)"/>
+                <TextBox x:Name="SupplierInvoiceNumberBox" Width="150" Margin="0,4,0,0"/>
+            </StackPanel>
+            <StackPanel Margin="0,0,16,0">
+                <TextBlock Text="طريقة الدفع"/>
+                <ComboBox x:Name="PaymentMethodCombo" Width="130" Margin="0,4,0,0"/>
+            </StackPanel>
+        </WrapPanel>
+
+        <DockPanel Grid.Row="2">
+            <Button DockPanel.Dock="Top" Content="إضافة صنف" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Margin="0,0,0,8" Click="AddLine_Click"/>
+            <DataGrid x:Name="LinesGrid" DockPanel.Dock="Top" Height="240" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="الصنف" Binding="{Binding Product.Name}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="الكمية" Binding="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" Width="80" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="سعر الشراء" Binding="{Binding UnitCost, UpdateSourceTrigger=PropertyChanged}" Width="90" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="الخصم" Binding="{Binding DiscountAmount, UpdateSourceTrigger=PropertyChanged}" Width="80" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="الإجمالي" Binding="{Binding LineTotal, StringFormat={}{0:N2}}" Width="90" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button DockPanel.Dock="Top" Content="حذف الصنف المحدد" Style="{StaticResource DangerButton}" HorizontalAlignment="Left" Margin="0,8,0,0" Click="RemoveLine_Click"/>
+        </DockPanel>
+
+        <Grid Grid.Row="3" Margin="0,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="260"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="ملاحظات"/>
+                <TextBox x:Name="NotesBox" Height="70" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,4,0,0"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="16,0,0,0">
+                <Grid Margin="0,0,0,4">
+                    <TextBlock Text="الإجمالي قبل الخصم" HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="SubTotalText" HorizontalAlignment="Left" Text="0.00"/>
+                </Grid>
+                <Grid Margin="0,0,0,4">
+                    <TextBlock Text="الخصم العام" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="OverallDiscountBox" Width="100" HorizontalAlignment="Left" Text="0" TextChanged="Totals_Changed"/>
+                </Grid>
+                <Grid Margin="0,0,0,4">
+                    <TextBlock Text="تكاليف إضافية (شحن..)" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="ExtraCostsBox" Width="100" HorizontalAlignment="Left" Text="0" TextChanged="Totals_Changed"/>
+                </Grid>
+                <Grid Margin="0,0,0,4">
+                    <TextBlock Text="الإجمالي النهائي" HorizontalAlignment="Right" FontWeight="Bold"/>
+                    <TextBlock x:Name="TotalText" HorizontalAlignment="Left" Text="0.00" FontWeight="Bold"/>
+                </Grid>
+                <Grid Margin="0,0,0,4">
+                    <TextBlock Text="المبلغ المدفوع" HorizontalAlignment="Right"/>
+                    <TextBox x:Name="PaidAmountBox" Width="100" HorizontalAlignment="Left" Text="0" TextChanged="Totals_Changed"/>
+                </Grid>
+                <Grid>
+                    <TextBlock Text="المتبقي" HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="RemainingText" HorizontalAlignment="Left" Text="0.00"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left">
+            <TextBlock x:Name="ErrorText" Foreground="#DC2626" TextWrapping="Wrap" Margin="0,0,16,0" VerticalAlignment="Center" MaxWidth="400"/>
+            <Button Content="حفظ الفاتورة" Style="{StaticResource PrimaryButton}" Width="140" Click="Save_Click" Margin="0,0,8,0"/>
+            <Button Content="إلغاء" Style="{StaticResource SecondaryButton}" Width="100" Click="Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

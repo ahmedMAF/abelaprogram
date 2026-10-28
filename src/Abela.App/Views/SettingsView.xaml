@@ -1,0 +1,81 @@
+<UserControl x:Class="Abela.App.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="الإعدادات" Style="{StaticResource PageTitle}"/>
+
+            <Border Style="{StaticResource CardBorder}" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="بيانات الشركة" FontWeight="Bold" FontSize="16" Margin="0,0,0,12"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="اسم الشركة"/>
+                            <TextBox Text="{Binding Company.CompanyName}" Margin="0,4,0,10"/>
+                            <TextBlock Text="رقم الهاتف"/>
+                            <TextBox Text="{Binding Company.Phone}" Margin="0,4,0,10"/>
+                            <TextBlock Text="رقم واتساب"/>
+                            <TextBox Text="{Binding Company.WhatsApp}" Margin="0,4,0,10"/>
+                            <TextBlock Text="البريد الإلكتروني"/>
+                            <TextBox Text="{Binding Company.Email}" Margin="0,4,0,10"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="العنوان"/>
+                            <TextBox Text="{Binding Company.Address}" Margin="0,4,0,10"/>
+                            <TextBlock Text="الرقم الضريبي"/>
+                            <TextBox Text="{Binding Company.TaxNumber}" Margin="0,4,0,10"/>
+                            <TextBlock Text="نص أسفل الفاتورة"/>
+                            <TextBox Text="{Binding Company.InvoiceFooterText}" Margin="0,4,0,10"/>
+                        </StackPanel>
+                    </Grid>
+                    <Button Content="حفظ بيانات الشركة" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Command="{Binding SaveCompanyCommand}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource CardBorder}" Margin="0,0,0,16">
+                <StackPanel>
+                    <TextBlock Text="إعدادات الفواتير والنظام" FontWeight="Bold" FontSize="16" Margin="0,0,0,12"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="بادئة فاتورة البيع"/>
+                            <TextBox Text="{Binding Application.SalesInvoicePrefix}" Margin="0,4,0,10"/>
+                            <TextBlock Text="بادئة فاتورة الشراء"/>
+                            <TextBox Text="{Binding Application.PurchaseInvoicePrefix}" Margin="0,4,0,10"/>
+                            <TextBlock Text="بادئة سند القبض"/>
+                            <TextBox Text="{Binding Application.ReceiptVoucherPrefix}" Margin="0,4,0,10"/>
+                            <TextBlock Text="بادئة سند الدفع"/>
+                            <TextBox Text="{Binding Application.PaymentVoucherPrefix}" Margin="0,4,0,10"/>
+                            <TextBlock Text="نسبة الضريبة الافتراضية (%)"/>
+                            <TextBox Text="{Binding Application.DefaultTaxRate}" Margin="0,4,0,10"/>
+                            <CheckBox Content="تفعيل الضريبة" IsChecked="{Binding Application.TaxEnabled}" Margin="0,0,0,10"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <CheckBox Content="السماح بتعديل سعر البيع" IsChecked="{Binding Application.AllowPriceEdit}" Margin="0,0,0,10"/>
+                            <CheckBox Content="السماح بالمخزون السالب" IsChecked="{Binding Application.AllowNegativeStock}" Margin="0,0,0,10"/>
+                            <TextBlock Text="العملة"/>
+                            <TextBox Text="{Binding Application.Currency}" Margin="0,4,0,10"/>
+                            <TextBlock Text="حجم ورق الطباعة (A4 / A5)"/>
+                            <TextBox Text="{Binding Application.PaperSize}" Margin="0,4,0,10"/>
+                            <TextBlock Text="عدد أيام تنبيه الديون"/>
+                            <TextBox Text="{Binding Application.DebtAlertDays}" Margin="0,4,0,10"/>
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="حفظ الإعدادات" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Command="{Binding SaveApplicationCommand}" Margin="0,0,8,0"/>
+                        <Button Content="تصنيفات المصروفات" Style="{StaticResource SecondaryButton}" Command="{Binding ManageExpenseCategoriesCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

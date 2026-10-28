@@ -1,0 +1,20 @@
+<UserControl x:Class="Abela.App.Views.PurchaseReturnsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="مرتجعات المشتريات" Style="{StaticResource PageTitle}"/>
+        <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,12">
+            <Button Content="تحديث" Style="{StaticResource PrimaryButton}" Command="{Binding LoadCommand}" Margin="0,0,8,0"/>
+            <Button Content="مرتجع جديد" Style="{StaticResource SuccessButton}" Command="{Binding NewReturnCommand}" Visibility="{Binding CanAdd, Converter={StaticResource BoolToVis}}"/>
+        </WrapPanel>
+        <DataGrid ItemsSource="{Binding Returns}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="رقم المرتجع" Binding="{Binding ReturnNumber}" Width="110"/>
+                <DataGridTextColumn Header="التاريخ" Binding="{Binding ReturnDate, StringFormat={}{0:yyyy-MM-dd}}" Width="110"/>
+                <DataGridTextColumn Header="فاتورة الشراء" Binding="{Binding PurchaseInvoice.InvoiceNumber}" Width="110"/>
+                <DataGridTextColumn Header="المورد" Binding="{Binding Supplier.Name}" Width="*"/>
+                <DataGridTextColumn Header="الإجمالي" Binding="{Binding TotalAmount, StringFormat={}{0:N2}}" Width="90"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

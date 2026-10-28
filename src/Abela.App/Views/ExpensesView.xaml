@@ -1,0 +1,28 @@
+<UserControl x:Class="Abela.App.Views.ExpensesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="المصروفات" Style="{StaticResource PageTitle}"/>
+        <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,12">
+            <TextBlock Text="من" VerticalAlignment="Center" Margin="0,0,4,0"/>
+            <DatePicker SelectedDate="{Binding FromDate}" Width="130" Margin="0,0,8,0"/>
+            <TextBlock Text="إلى" VerticalAlignment="Center" Margin="0,0,4,0"/>
+            <DatePicker SelectedDate="{Binding ToDate}" Width="130" Margin="0,0,8,0"/>
+            <Button Content="بحث" Style="{StaticResource PrimaryButton}" Command="{Binding SearchCommand}" Margin="0,0,8,0"/>
+            <Button Content="تسجيل مصروف" Style="{StaticResource SuccessButton}" Command="{Binding AddCommand}" Margin="0,0,8,0" Visibility="{Binding CanAdd, Converter={StaticResource BoolToVis}}"/>
+            <Button Content="تعديل" Style="{StaticResource SecondaryButton}" Command="{Binding EditCommand}" Margin="0,0,8,0" Visibility="{Binding CanEdit, Converter={StaticResource BoolToVis}}"/>
+            <Button Content="إلغاء" Style="{StaticResource DangerButton}" Command="{Binding CancelExpenseCommand}" Visibility="{Binding CanCancel, Converter={StaticResource BoolToVis}}"/>
+        </WrapPanel>
+        <DataGrid ItemsSource="{Binding Expenses}" SelectedItem="{Binding SelectedExpense}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="رقم المصروف" Binding="{Binding ExpenseNumber}" Width="110"/>
+                <DataGridTextColumn Header="التاريخ" Binding="{Binding ExpenseDate, StringFormat={}{0:yyyy-MM-dd}}" Width="100"/>
+                <DataGridTextColumn Header="التصنيف" Binding="{Binding ExpenseCategory.Name}" Width="120"/>
+                <DataGridTextColumn Header="الوصف" Binding="{Binding Description}" Width="*"/>
+                <DataGridTextColumn Header="المبلغ" Binding="{Binding Amount, StringFormat={}{0:N2}}" Width="90"/>
+                <DataGridTextColumn Header="طريقة الدفع" Binding="{Binding PaymentMethod}" Width="100"/>
+                <DataGridTextColumn Header="الحالة" Binding="{Binding Status}" Width="70"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

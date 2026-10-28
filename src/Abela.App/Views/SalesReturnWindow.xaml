@@ -1,0 +1,35 @@
+<Window x:Class="Abela.App.Views.SalesReturnWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="مرتجع مبيعات" Height="560" Width="720" FlowDirection="RightToLeft" WindowStartupLocation="CenterOwner">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="HeaderText" Grid.Row="0" Style="{StaticResource PageTitle}"/>
+
+        <DataGrid x:Name="LinesGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="الصنف" Binding="{Binding ProductName}" Width="*" IsReadOnly="True"/>
+                <DataGridTextColumn Header="الكمية المباعة" Binding="{Binding OriginalQuantity}" Width="100" IsReadOnly="True"/>
+                <DataGridTextColumn Header="كمية الإرجاع" Binding="{Binding ReturnQuantity, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                <DataGridTextColumn Header="السبب" Binding="{Binding Reason, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,10">
+            <TextBlock Text="طريقة الاسترداد" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <ComboBox x:Name="RefundMethodCombo" Width="180"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left">
+            <TextBlock x:Name="ErrorText" Foreground="#DC2626" TextWrapping="Wrap" Margin="0,0,16,0" VerticalAlignment="Center" MaxWidth="350"/>
+            <Button Content="حفظ المرتجع" Style="{StaticResource PrimaryButton}" Width="140" Click="Save_Click" Margin="0,0,8,0"/>
+            <Button Content="إلغاء" Style="{StaticResource SecondaryButton}" Width="100" Click="Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,62 @@
+<Window x:Class="Abela.App.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Abela - نظام إدارة المبيعات والمخزون" Height="800" Width="1280"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" FlowDirection="RightToLeft">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="#111827">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Margin="0,12,0,10">
+                    <TextBlock Text="Abela" FontSize="22" FontWeight="Bold" Foreground="#1F6FEB" HorizontalAlignment="Center"/>
+                    <TextBlock Text="إدارة المبيعات والمخزون" FontSize="9" Foreground="#9CA3AF" HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <Button DockPanel.Dock="Bottom" Content="تسجيل الخروج" Command="{Binding LogoutCommand}" Style="{StaticResource NavButton}" Margin="10,6,10,10" Foreground="#F87171"/>
+
+                <StackPanel Margin="0,0,0,4">
+                    <Button Content="لوحة التحكم" Command="{Binding GoDashboardCommand}" Style="{StaticResource NavButton}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Dashboard}"/>
+                    <Button Content="المبيعات" Command="{Binding GoSalesCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanSales, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Sales}"/>
+                    <Button Content="مرتجعات المبيعات" Command="{Binding GoSalesReturnsCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanSales, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=SalesReturns}"/>
+                    <Button Content="المشتريات" Command="{Binding GoPurchasesCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanPurchases, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Purchases}"/>
+                    <Button Content="مرتجعات المشتريات" Command="{Binding GoPurchaseReturnsCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanPurchases, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=PurchaseReturns}"/>
+                    <Button Content="المنتجات" Command="{Binding GoProductsCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanProducts, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Products}"/>
+                    <Button Content="المخزون" Command="{Binding GoInventoryCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanInventory, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Inventory}"/>
+                    <Button Content="العملاء" Command="{Binding GoCustomersCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanCustomers, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Customers}"/>
+                    <Button Content="الموردون" Command="{Binding GoSuppliersCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanSuppliers, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Suppliers}"/>
+                    <Button Content="الدفعات" Command="{Binding GoPaymentsCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanPayments, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Payments}"/>
+                    <Button Content="المصروفات" Command="{Binding GoExpensesCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanExpenses, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Expenses}"/>
+                    <Button Content="التقارير" Command="{Binding GoReportsCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanReports, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Reports}"/>
+                    <Button Content="المستخدمون" Command="{Binding GoUsersCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanUsers, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Users}"/>
+                    <Button Content="سجل النشاط" Command="{Binding GoAuditCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanAudit, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Audit}"/>
+                    <Button Content="الإعدادات" Command="{Binding GoSettingsCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanSettings, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Settings}"/>
+                    <Button Content="النسخ الاحتياطي" Command="{Binding GoBackupCommand}" Style="{StaticResource NavButton}" Visibility="{Binding CanBackup, Converter={StaticResource BoolToVis}}" Background="{Binding ActiveMenu, Converter={StaticResource ActiveMenuBg}, ConverterParameter=Backup}"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- Main area -->
+        <DockPanel Grid.Column="1">
+            <Border DockPanel.Dock="Top" Background="White" BorderBrush="#E5E7EB" BorderThickness="0,0,0,1" Padding="20,12">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Text="{Binding UserDisplayName}" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <TextBlock Text=" - " VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding RoleDisplayName}" Foreground="#6B7280" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button Content="تغيير كلمة المرور" HorizontalAlignment="Right" Style="{StaticResource SecondaryButton}"
+                            Command="{Binding ChangeMyPasswordCommand}" Padding="10,4"/>
+                </Grid>
+            </Border>
+
+            <Border Background="#F3F4F6" Padding="24">
+                <ContentControl Content="{Binding Navigation.CurrentView}"/>
+            </Border>
+        </DockPanel>
+    </Grid>
+</Window>

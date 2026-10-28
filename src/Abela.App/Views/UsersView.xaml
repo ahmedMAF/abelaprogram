@@ -1,0 +1,22 @@
+<UserControl x:Class="Abela.App.Views.UsersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="المستخدمون" Style="{StaticResource PageTitle}"/>
+        <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,12">
+            <Button Content="إضافة مستخدم" Style="{StaticResource SuccessButton}" Command="{Binding AddUserCommand}" Margin="0,0,8,0"/>
+            <Button Content="تعديل" Style="{StaticResource SecondaryButton}" Command="{Binding EditUserCommand}" Margin="0,0,8,0"/>
+            <Button Content="إعادة تعيين كلمة المرور" Style="{StaticResource SecondaryButton}" Command="{Binding ResetPasswordCommand}" Margin="0,0,8,0"/>
+            <Button Content="الأدوار والصلاحيات" Style="{StaticResource SecondaryButton}" Command="{Binding ManageRolesCommand}"/>
+        </WrapPanel>
+        <DataGrid ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="اسم المستخدم" Binding="{Binding Username}" Width="120"/>
+                <DataGridTextColumn Header="الاسم الكامل" Binding="{Binding FullName}" Width="*"/>
+                <DataGridTextColumn Header="الدور" Binding="{Binding Role.Name}" Width="140"/>
+                <DataGridTextColumn Header="آخر تسجيل دخول" Binding="{Binding LastLoginAt, StringFormat={}{0:yyyy-MM-dd HH:mm}}" Width="150"/>
+                <DataGridCheckBoxColumn Header="فعال" Binding="{Binding IsActive}" Width="60" ElementStyle="{StaticResource AppCheckBoxStyle}" EditingElementStyle="{StaticResource AppCheckBoxStyle}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,17 @@
+<Application x:Class="Abela.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:common="clr-namespace:Abela.App.Common">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/AppStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <common:StringToVisibilityConverter x:Key="StringToVis"/>
+            <common:ActiveMenuToBackgroundConverter x:Key="ActiveMenuBg"/>
+            <common:InventoryTransactionTypeConverter x:Key="InventoryTransactionTypeConv"/>
+            <common:ReferenceTypeConverter x:Key="ReferenceTypeConv"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,25 @@
+<UserControl x:Class="Abela.App.Views.SuppliersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="الموردون" Style="{StaticResource PageTitle}"/>
+        <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,12">
+            <TextBox Width="240" Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,8,0"/>
+            <Button Content="بحث" Style="{StaticResource PrimaryButton}" Command="{Binding SearchCommand}" Margin="0,0,8,0"/>
+            <Button Content="إضافة مورد" Style="{StaticResource SuccessButton}" Command="{Binding AddCommand}" Margin="0,0,8,0" Visibility="{Binding CanAdd, Converter={StaticResource BoolToVis}}"/>
+            <Button Content="تعديل" Style="{StaticResource SecondaryButton}" Command="{Binding EditCommand}" Margin="0,0,8,0" Visibility="{Binding CanEdit, Converter={StaticResource BoolToVis}}"/>
+            <Button Content="حذف" Style="{StaticResource DangerButton}" Command="{Binding DeleteCommand}" Margin="0,0,8,0" Visibility="{Binding CanEdit, Converter={StaticResource BoolToVis}}"/>
+            <Button Content="كشف حساب" Style="{StaticResource SecondaryButton}" Command="{Binding ViewStatementCommand}"/>
+        </WrapPanel>
+        <DataGrid ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="الكود" Binding="{Binding Code}" Width="90"/>
+                <DataGridTextColumn Header="الاسم" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="الشركة" Binding="{Binding CompanyName}" Width="140"/>
+                <DataGridTextColumn Header="الهاتف" Binding="{Binding Phone}" Width="120"/>
+                <DataGridTextColumn Header="الرصيد الافتتاحي" Binding="{Binding OpeningBalance, StringFormat={}{0:N2}}" Width="110"/>
+                <DataGridCheckBoxColumn Header="فعال" Binding="{Binding IsActive}" Width="60" ElementStyle="{StaticResource AppCheckBoxStyle}" EditingElementStyle="{StaticResource AppCheckBoxStyle}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

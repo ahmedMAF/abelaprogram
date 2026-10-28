@@ -1,0 +1,35 @@
+<UserControl x:Class="Abela.App.Views.BackupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBlock Text="النسخ الاحتياطي والاستعادة" Style="{StaticResource PageTitle}"/>
+
+        <Border Style="{StaticResource CardBorder}" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="إنشاء نسخة احتياطية" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <TextBlock TextWrapping="Wrap" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,10"
+                           Text="يمكنك إنشاء نسخة احتياطية سريعة داخل مجلد بيانات البرنامج، أو اختيار مكان مخصص لحفظ النسخة."/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="نسخة احتياطية سريعة" Style="{StaticResource SuccessButton}" Command="{Binding CreateQuickBackupCommand}" Margin="0,0,8,0"/>
+                    <Button Content="حفظ نسخة احتياطية في مكان آخر" Style="{StaticResource PrimaryButton}" Command="{Binding CreateBackupCommand}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource CardBorder}" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="النسخ الاحتياطية المحفوظة محليًا" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <ListBox ItemsSource="{Binding BackupFiles}" Height="150"/>
+            </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource CardBorder}">
+            <StackPanel>
+                <TextBlock Text="استعادة نسخة احتياطية" FontWeight="Bold" FontSize="16" Foreground="{StaticResource DangerBrush}" Margin="0,0,0,10"/>
+                <TextBlock TextWrapping="Wrap" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,10"
+                           Text="تحذير: ستحل عملية الاستعادة محل جميع البيانات الحالية. سيتم أخذ نسخة أمان من البيانات الحالية تلقائيًا قبل الاستعادة، وسيُطلب منك إعادة تشغيل البرنامج بعد نجاح العملية."/>
+                <Button Content="استعادة من ملف" Style="{StaticResource DangerButton}" HorizontalAlignment="Left" Command="{Binding RestoreCommand}"/>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
